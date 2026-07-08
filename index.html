@@ -62,6 +62,14 @@
             </div>
         </section>
 
+        <!-- ============ SYNC PULL BANNER ============ -->
+        <div class="kc-overdue-banner" id="kc-sync-pull-banner-wrap">
+            <div class="kc-overdue-banner-inner hidden" id="kc-sync-pull-banner" style="background:var(--brand-50); border-color:var(--brand-500); color:var(--brand-700);">
+                <span>🔄 សមាជិកម្នាក់ទៀតបានកែប្រែទិន្នន័យ</span>
+                <button class="kc-btn" id="kc-sync-pull-btn" style="background:var(--brand-600); color:white;">ទាញយកបច្ចុប្បន្នភាព</button>
+            </div>
+        </div>
+
         <!-- ============ OVERDUE BANNER ============ -->
         <div class="kc-overdue-banner" id="kc-overdue-banner-wrap">
             <div class="kc-overdue-banner-inner hidden" id="kc-overdue-banner">
@@ -72,8 +80,8 @@
 
         <!-- ============ STATUS BANNER ============ -->
         <div class="kc-status-banner">
-            <div class="kc-status-left"><span class="kc-dot"></span> រក្សាទុកស្វ័យប្រវត្តិនៅលើឧបករណ៍</div>
-            <div class="kc-status-right">v3.1 · រចនាថ្មី</div>
+            <div class="kc-status-left"><span class="kc-dot" id="kc-sync-dot"></span> <span id="kc-sync-label">កំពុងភ្ជាប់...</span></div>
+            <div class="kc-status-right">v3.2 · Real-time Sync</div>
         </div>
 
         <!-- ============ TABS ============ -->
@@ -418,6 +426,10 @@
     <!-- ============ HIDDEN FILE INPUT ============ -->
     <input type="file" id="kc-file-input" accept=".json" style="display:none;">
 
+    <!-- Firebase (for real-time multi-user sync — see CLOUD SYNC SETUP in app.js) -->
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
     <script src="app.js"></script>
 </body>
 </html>

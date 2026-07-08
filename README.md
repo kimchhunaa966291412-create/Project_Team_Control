@@ -1,5 +1,39 @@
 # 🌾 KhmerCrop AI · Project Control
 
+## 🔄 Real-time sync between team members
+
+By default this app saves only to each person's own browser. To make edits
+show up live for every teammate (member 1 edits → everyone sees it), enable
+free Firebase sync — takes about 3 minutes:
+
+1. Go to https://console.firebase.google.com → **Add project** (free tier is enough).
+2. **Build → Firestore Database → Create database** → start in **Production mode** → pick any region.
+3. **Build → Authentication → Sign-in method** → enable **Anonymous**.
+4. In **Firestore → Rules**, replace the contents with:
+   ```
+   rules_version = '2';
+   service cloud.firestore {
+     match /databases/{database}/documents {
+       match /khmercrop-project-control/{docId} {
+         allow read, write: if request.auth != null;
+       }
+     }
+   }
+   ```
+   then click **Publish**.
+5. Project settings (gear icon, top left) → **General** → scroll to **Your apps** → click the **</>** (Web) icon → register the app → copy the `firebaseConfig` values shown.
+6. Open `app.js` in this repo, find the `FIREBASE_CONFIG` block near the top, and paste your values in place of the `"YOUR_..."` placeholders.
+7. Commit and push. Reload the site — the status bar at the top will switch to **🟢 Sync ជាមួយក្រុមផ្សេងទៀត (Real-time)**.
+
+That's it — every member who opens the page now shares the same live data.
+If a teammate is actively typing when an update arrives, it won't interrupt
+them; instead a banner appears offering to pull in the update (or they can
+press `Ctrl+S`).
+
+If you skip this setup, the app still works exactly as before, just
+per-device only.
+
+
 A single-page project management dashboard (Khmer language) for tracking phases,
 tasks, team, budget, risks, meetings, and progress — no backend required.
 All data is saved in the browser via `localStorage`, and can be exported /
